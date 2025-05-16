@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
 import { resetPasswordSchema } from "@/schemas/auth";
+import { Input } from "@/components/ui/Input";
+import { Label } from "@/components/ui/Label";
 
 export type ResetPasswordValues = z.infer<typeof resetPasswordSchema>;
 
@@ -23,56 +25,34 @@ export const ResetPasswordForm: React.FC<ResetPasswordProps> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <div>
-        <label
-          htmlFor="password"
-          className="block text-sm/6 font-medium text-gray-900"
-        >
-          New Password
-        </label>
-        <div className="mt-2">
-          <input
-            id="password"
-            {...register("password")}
-            type="password"
-            required
-            autoComplete="current-password"
-            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1
-                       -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2
-                       focus:-outline-offset-2 focus:outline-teal-600 sm:text-sm/6"
-          />
-          {errors.password && (
-            <p className="text-sm text-red-600 mt-1">
-              {errors.password.message}
-            </p>
-          )}
-        </div>
+      <div className="grid w-full max-w-sm items-center gap-1.5 mt-2">
+        <Label htmlFor="password">New Password</Label>
+        <Input
+          type="password"
+          id="password"
+          {...register("password")}
+          required
+          autoComplete="current-password"
+        />
+        {errors.password && (
+          <p className="text-sm text-red-600 mt-1">{errors.password.message}</p>
+        )}
       </div>
 
-      <div>
-        <label
-          htmlFor="confirmPassword"
-          className="block text-sm/6 font-medium text-gray-900"
-        >
-          Confirm Password
-        </label>
-        <div className="mt-2">
-          <input
-            id="confirmPassword"
-            {...register("confirmPassword")}
-            type="password"
-            required
-            autoComplete="current-password"
-            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1
-                       -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2
-                       focus:-outline-offset-2 focus:outline-teal-600 sm:text-sm/6"
-          />
-          {errors.confirmPassword && (
-            <p className="text-sm text-red-600 mt-1">
-              {errors.confirmPassword.message}
-            </p>
-          )}
-        </div>
+      <div className="grid w-full max-w-sm items-center gap-1.5 mt-2">
+        <Label htmlFor="confirmPassword"> Confirm Password</Label>
+        <Input
+          type="password"
+          id="confirmPassword"
+          {...register("confirmPassword")}
+          required
+          autoComplete="current-password"
+        />
+        {errors.confirmPassword && (
+          <p className="text-sm text-red-600 mt-1">
+            {errors.confirmPassword.message}
+          </p>
+        )}
       </div>
 
       <button

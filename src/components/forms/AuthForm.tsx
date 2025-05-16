@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
 import { signUpSchema, signInSchema } from "@/schemas/auth";
+import { Input } from "@/components/ui/Input";
+import { Label } from "@/components/ui/Label";
 
 type AuthFormProps = {
   mode: "signup" | "signin";
@@ -30,54 +32,34 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <div>
-        <label
-          htmlFor="email"
-          className="block text-sm/6 font-medium text-gray-900"
-        >
-          Email address
-        </label>
-        <div className="mt-2">
-          <input
-            id="email"
-            {...register("email")}
-            type="email"
-            required
-            autoComplete="email"
-            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1
-                       -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2
-                       focus:-outline-offset-2 focus:outline-teal-600 sm:text-sm/6"
-          />
-          {errors.email && (
-            <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>
-          )}
-        </div>
+      <div className="grid w-full max-w-sm items-center gap-1.5">
+        <Label htmlFor="email">Email</Label>
+        <Input
+          type="email"
+          id="email"
+          placeholder="Email"
+          {...register("email")}
+          required
+          autoComplete="email"
+        />
+
+        {errors.email && (
+          <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>
+        )}
       </div>
 
-      <div>
-        <label
-          htmlFor="password"
-          className="block text-sm/6 font-medium text-gray-900"
-        >
-          Password
-        </label>
-        <div className="mt-2">
-          <input
-            id="password"
-            {...register("password")}
-            type="password"
-            required
-            autoComplete="current-password"
-            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1
-                       -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2
-                       focus:-outline-offset-2 focus:outline-teal-600 sm:text-sm/6"
-          />
-          {errors.password && (
-            <p className="text-sm text-red-600 mt-1">
-              {errors.password.message}
-            </p>
-          )}
-        </div>
+      <div className="grid w-full max-w-sm items-center gap-1.5 mt-2">
+        <Label htmlFor="password">Password</Label>
+        <Input
+          type="password"
+          id="password"
+          {...register("password")}
+          required
+          autoComplete="current-password"
+        />
+        {errors.password && (
+          <p className="text-sm text-red-600 mt-1">{errors.password.message}</p>
+        )}
       </div>
 
       <div>
