@@ -6,6 +6,7 @@ import { ForgotPasswordPage } from "@/pages/ForgotPasswordPage";
 import { ResetPasswordPage } from "@/pages/ResetPasswordPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
+import { PublicOnlyRoute } from "@/components/routes/PublicOnlyRoute";
 
 const routes = [
   { path: "/", element: <HomePage />, isPrivate: true },
@@ -31,7 +32,7 @@ function App() {
         const element = route.isPrivate ? (
           <ProtectedRoute>{route.element}</ProtectedRoute>
         ) : (
-          route.element
+          <PublicOnlyRoute>{route.element}</PublicOnlyRoute>
         );
         return <Route key={route.path} path={route.path} element={element} />;
       })}

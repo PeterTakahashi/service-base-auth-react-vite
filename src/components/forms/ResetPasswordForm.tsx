@@ -5,6 +5,7 @@ import type { z } from "zod";
 import { resetPasswordSchema } from "@/schemas/auth";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
+import { FormButton } from "@/components/ui/FormButton";
 
 export type ResetPasswordValues = z.infer<typeof resetPasswordSchema>;
 
@@ -30,13 +31,12 @@ export const ResetPasswordForm: React.FC<ResetPasswordProps> = ({
         <Input
           type="password"
           id="password"
+          placeholder="Password"
           {...register("password")}
           required
           autoComplete="current-password"
+          errorMessage={errors.password && errors.password.message}
         />
-        {errors.password && (
-          <p className="text-sm text-red-600 mt-1">{errors.password.message}</p>
-        )}
       </div>
 
       <div className="grid w-full max-w-sm items-center gap-1.5 mt-2">
@@ -44,25 +44,23 @@ export const ResetPasswordForm: React.FC<ResetPasswordProps> = ({
         <Input
           type="password"
           id="confirmPassword"
+          placeholder="Confirm Password"
           {...register("confirmPassword")}
           required
           autoComplete="current-password"
+          errorMessage={
+            errors.confirmPassword && errors.confirmPassword.message
+          }
         />
-        {errors.confirmPassword && (
-          <p className="text-sm text-red-600 mt-1">
-            {errors.confirmPassword.message}
-          </p>
-        )}
       </div>
 
-      <button
+      <FormButton
         type="submit"
         disabled={isSubmitting}
-        className="w-full rounded-md bg-teal-600 px-3 py-1.5 text-base text-white hover:bg-teal-700 focus:outline-none focus:ring focus:ring-teal-500
-        focus:ring-opacity-50 sm:text-sm/6"
+        className="w-full rounded-md"
       >
         {isSubmitting ? "Sending..." : "Reset Password"}
-      </button>
+      </FormButton>
     </form>
   );
 };

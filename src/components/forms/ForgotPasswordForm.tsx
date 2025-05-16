@@ -5,6 +5,7 @@ import type { z } from "zod";
 import { forgotPasswordSchema } from "@/schemas/auth";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
+import { FormButton } from "@/components/ui/FormButton";
 
 export type ForgotPasswordValues = z.infer<typeof forgotPasswordSchema>;
 
@@ -34,6 +35,7 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
           {...register("email")}
           required
           autoComplete="email"
+          errorMessage={errors.email && errors.email.message}
         />
 
         {errors.email && (
@@ -41,14 +43,13 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
         )}
       </div>
 
-      <button
+      <FormButton
         type="submit"
         disabled={isSubmitting}
-        className="w-full rounded-md bg-teal-600 px-3 py-1.5 text-base text-white hover:bg-teal-700 focus:outline-none focus:ring focus:ring-teal-500
-        focus:ring-opacity-50 sm:text-sm/6"
+        className="w-full rounded-md"
       >
         {isSubmitting ? "Sending..." : "Send Reset Link"}
-      </button>
+      </FormButton>
     </form>
   );
 };

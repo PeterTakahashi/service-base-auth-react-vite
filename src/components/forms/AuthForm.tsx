@@ -5,6 +5,7 @@ import type { z } from "zod";
 import { signUpSchema, signInSchema } from "@/schemas/auth";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
+import { FormButton } from "@/components/ui/FormButton";
 
 type AuthFormProps = {
   mode: "signup" | "signin";
@@ -41,11 +42,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
           {...register("email")}
           required
           autoComplete="email"
+          errorMessage={errors.email && errors.email.message}
         />
-
-        {errors.email && (
-          <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>
-        )}
       </div>
 
       <div className="grid w-full max-w-sm items-center gap-1.5 mt-2">
@@ -53,26 +51,22 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
         <Input
           type="password"
           id="password"
+          placeholder="Password"
           {...register("password")}
           required
           autoComplete="current-password"
+          errorMessage={errors.password && errors.password.message}
         />
-        {errors.password && (
-          <p className="text-sm text-red-600 mt-1">{errors.password.message}</p>
-        )}
       </div>
 
       <div>
-        <button
+        <FormButton
           type="submit"
           disabled={isSubmitting}
-          className="flex w-full justify-center rounded-md bg-teal-600 px-3 py-1.5
-                     text-sm/6 font-semibold text-white shadow-xs hover:bg-teal-500
-                     focus-visible:outline-2 focus-visible:outline-offset-2
-                     focus-visible:outline-teal-600"
+          className="flex w-full justify-center"
         >
           {isSubmitting ? "Sending..." : isSignUp ? "Sign up" : "Sign in"}
-        </button>
+        </FormButton>
       </div>
     </form>
   );
