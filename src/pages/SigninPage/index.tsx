@@ -14,13 +14,23 @@ export const SigninPage: FC = () => {
         <AuthForm mode="signin" />
 
         <p className="mt-10 text-center text-sm/6 text-gray-500">
-          No account yet?{" "}
-          <a
-            href="/signup"
-            className="font-semibold text-teal-600 hover:text-teal-500"
-          >
-            Sign up
-          </a>
+          <div>
+            No account yet?{" "}
+            <a
+              href="/signup"
+              className="font-semibold text-teal-600 hover:text-teal-500"
+            >
+              Sign up
+            </a>
+          </div>
+          <div>
+            <a
+              href="/forgot-password"
+              className="font-semibold text-teal-600 hover:text-teal-500"
+            >
+              Forgot password?
+            </a>
+          </div>
         </p>
       </div>
     </div>

@@ -25,7 +25,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
   const onSubmit = async (data: SignUpValues & SignInValues) => {
     console.log("Form submitted:", data);
     document.cookie = `token=test-token; path=/;`;
-    window.location.href = "/dashboard";
+    window.location.href = "/";
   };
 
   return (
