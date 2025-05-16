@@ -1,11 +1,17 @@
-import "./App.css";
-import { Button } from "@/components/ui/button";
+import { Routes, Route } from "react-router-dom";
+import { HomePage } from "@/pages/HomePage";
+import { SigninPage } from "@/pages/SigninPage";
+import { SignupPage } from "./pages/SIgnupPage";
+import { NotFoundPage } from "@/pages/NotFound";
 
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-svh">
-      <Button>Click me</Button>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/signin" element={<SigninPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 }
 
