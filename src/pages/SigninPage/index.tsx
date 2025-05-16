@@ -1,8 +1,12 @@
 import type { FC } from "react";
+import { useState } from "react";
+import axios, { AxiosError } from "axios";
 import { AuthForm, type SignInValues } from "@/components/forms/AuthForm";
 import { signIn, type SignInRequestBody } from "@/api/auth/signIn";
 
 export const SigninPage: FC = () => {
+  const [errorMessage, setErrorMessage] = useState("");
+
   const onSubmitSignIn = async (data: SignInValues) => {
     try {
       const requestBody: SignInRequestBody = {
@@ -14,8 +18,20 @@ export const SigninPage: FC = () => {
       const response = await signIn(requestBody);
       document.cookie = `access_token=${response.access_token}; path=/;`;
       window.location.href = "/";
-    } catch (error) {
-      console.error("Error signing in:", error);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        const errorData = axiosError.response?.data as
+          | { detail?: string }
+          | undefined;
+        setErrorMessage(
+          errorData?.detail ?? "Sign-in failed. Please check your credentials."
+        );
+      } else {
+        setErrorMessage(
+          "An unexpected error occurred. Please try again later."
+        );
+      }
     }
   };
 
@@ -29,6 +45,12 @@ export const SigninPage: FC = () => {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <AuthForm mode="signin" onSubmit={onSubmitSignIn} />
+
+        {errorMessage && (
+          <p className="mt-4 text-center text-sm text-red-600">
+            {errorMessage}
+          </p>
+        )}
 
         <div className="mt-10 text-center text-sm/6 text-gray-500">
           <div>
