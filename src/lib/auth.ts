@@ -1,10 +1,10 @@
-export function getTokenFromCookie(
-  cookieName: string = "token"
+export function getAccessTokenFromCookie(
+  cookieName: string = "access_token"
 ): string | null {
   const cookies = document.cookie.split(";").map((c) => c.trim());
-  const tokenCookie = cookies.find((c) => c.startsWith(`${cookieName}=`));
-  if (!tokenCookie) {
+  const accessTokenCookie = cookies.find((c) => c.startsWith(`${cookieName}=`));
+  if (!accessTokenCookie) {
     return null;
   }
-  return tokenCookie.split("=")[1];
+  return accessTokenCookie.split("=")[1];
 }

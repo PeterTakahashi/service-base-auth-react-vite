@@ -21,7 +21,7 @@ export const ForgotPasswordPage: FC = () => {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <ForgotPasswordForm onSubmit={onSubmit} />
 
-        <p className="mt-10 text-center text-sm/6 text-gray-500">
+        <div className="mt-10 text-center text-sm/6 text-gray-500">
           Remembered your password?{" "}
           <a
             href="/signin"
@@ -29,7 +29,7 @@ export const ForgotPasswordPage: FC = () => {
           >
             Sign in
           </a>
-        </p>
+        </div>
       </div>
     </div>
   );

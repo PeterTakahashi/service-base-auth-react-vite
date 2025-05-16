@@ -9,12 +9,13 @@ import { FormButton } from "@/components/ui/FormButton";
 
 type AuthFormProps = {
   mode: "signup" | "signin";
+  onSubmit: (data: SignUpValues | SignInValues) => void;
 };
 
-type SignUpValues = z.infer<typeof signUpSchema>;
-type SignInValues = z.infer<typeof signInSchema>;
+export type SignUpValues = z.infer<typeof signUpSchema>;
+export type SignInValues = z.infer<typeof signInSchema>;
 
-export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
+export const AuthForm: React.FC<AuthFormProps> = ({ mode, onSubmit }) => {
   const isSignUp = mode === "signup";
 
   const {
@@ -25,14 +26,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
     resolver: zodResolver(isSignUp ? signUpSchema : signInSchema),
   });
 
-  const onSubmit = async (data: SignUpValues & SignInValues) => {
-    console.log("Form submitted:", data);
-    document.cookie = `token=test-token; path=/;`;
-    window.location.href = "/";
+  const onFormSubmit = async (data: SignUpValues & SignInValues) => {
+    onSubmit(data);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6">
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="email">Email</Label>
         <Input

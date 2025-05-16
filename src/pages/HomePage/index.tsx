@@ -3,7 +3,7 @@ import { useCallback } from "react";
 
 export const HomePage: FC = () => {
   const logout = useCallback(() => {
-    document.cookie = "token=;path=/;";
+    document.cookie = "access_token=;path=/;";
     window.location.href = "/signin"; // Redirect to the sign-in page
   }, []);
 
