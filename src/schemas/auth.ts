@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const specialChars = /[!@#$%^&*()\-_=+\[\]{}|;:,.<>?\/]/;
+const specialChars = /[!@#$%^&*()\-=+[\]{}|;:,.<>?/]/;
 
 export const signUpSchema = z.object({
   email: z.string().email("Invalid email address"),
