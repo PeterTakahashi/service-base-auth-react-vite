@@ -11,7 +11,7 @@ type AuthFormProps = {
 type SignUpValues = z.infer<typeof signUpSchema>;
 type SignInValues = z.infer<typeof signInSchema>;
 
-const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
+export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
   const isSignUp = mode === "signup";
 
   const {
@@ -95,5 +95,3 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
     </form>
   );
 };
-
-export default AuthForm;
