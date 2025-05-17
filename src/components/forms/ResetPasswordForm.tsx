@@ -57,7 +57,7 @@ export const ResetPasswordForm: React.FC<ResetPasswordProps> = ({
       <FormButton
         type="submit"
         disabled={isSubmitting}
-        className="w-full rounded-md"
+        className="w-full rounded-md mt-4"
       >
         {isSubmitting ? "Sending..." : "Reset Password"}
       </FormButton>

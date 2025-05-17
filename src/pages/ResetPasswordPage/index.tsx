@@ -1,21 +1,9 @@
 import type { FC } from "react";
-import { useCallback } from "react";
-import { useParams } from "react-router-dom";
-import {
-  type ResetPasswordValues,
-  ResetPasswordForm,
-} from "@/components/forms/ResetPasswordForm";
+import { ResetPasswordForm } from "@/components/forms/ResetPasswordForm";
+import { useResetPassword } from "@/features/hooks/auth/useResetPassword";
 
 export const ResetPasswordPage: FC = () => {
-  const { token } = useParams<{ token: string }>();
-
-  const onSubmit = useCallback(
-    async (values: ResetPasswordValues) => {
-      console.log("Forgot password values", values);
-      console.log("Token from path:", token);
-    },
-    [token]
-  );
+  const { onSubmitResetPassword, errorMessage } = useResetPassword();
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -26,7 +14,13 @@ export const ResetPasswordPage: FC = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <ResetPasswordForm onSubmit={onSubmit} />
+        <ResetPasswordForm onSubmit={onSubmitResetPassword} />
+
+        {errorMessage && (
+          <p className="mt-4 text-center text-sm text-red-600">
+            {errorMessage}
+          </p>
+        )}
       </div>
     </div>
   );
