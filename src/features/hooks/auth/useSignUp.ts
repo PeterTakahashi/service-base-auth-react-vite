@@ -32,7 +32,7 @@ export function useSignUp() {
           }
         } else {
           setErrorMessage(
-            axiosError.response?.data?.detail ||
+            (axiosError.response?.data as { detail?: string })?.detail ||
               "Sign-up failed. Please check your information and try again."
           );
         }

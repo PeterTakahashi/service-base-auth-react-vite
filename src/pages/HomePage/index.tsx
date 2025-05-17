@@ -1,21 +1,15 @@
 import type { FC } from "react";
-import { useCallback } from "react";
 import { useUser } from "@/features/swr/useUser";
+import { logout } from "@/lib/auth/logout";
 
 export const HomePage: FC = () => {
   const { user, isLoading, isError } = useUser();
-
-  const logout = useCallback(() => {
-    document.cookie = "access_token=;path=/;";
-    window.location.href = "/signin";
-  }, []);
 
   if (isLoading) {
     return <div>Loading user info...</div>;
   } else if (isError) {
     return <div>Error loading user info...</div>;
   } else if (!user) {
-    logout();
     return null;
   } else if (user && !user.is_verified) {
     return (window.location.href = "/not-verified");

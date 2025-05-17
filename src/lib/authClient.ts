@@ -1,4 +1,4 @@
-import { getAccessTokenFromCookie } from "@/lib/getAccessTokenFromCookie";
+import { getAccessTokenFromCookie } from "@/lib/auth/getAccessTokenFromCookie";
 import { client } from "@/lib/client";
 
 client.interceptors.request.use((config) => {

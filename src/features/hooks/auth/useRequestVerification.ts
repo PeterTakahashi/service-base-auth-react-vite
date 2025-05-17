@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@/features/swr/useUser";
 import { requestVerifyToken } from "@/features/api/auth/requestVerifyToken";
-
+import { logout } from "@/lib/auth/logout";
 /**
  * If the user is unverified, automatically call `requestVerifyToken`.
  */
@@ -12,7 +12,10 @@ export function useRequestVerification() {
 
   useEffect(() => {
     const doRequest = async () => {
-      if (!user) return;
+      if (!user) {
+        logout();
+        return;
+      }
 
       try {
         await requestVerifyToken(user.email);

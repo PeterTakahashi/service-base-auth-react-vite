@@ -1,21 +1,17 @@
 import { type FC } from "react";
-import { useCallback } from "react";
 import { useRequestVerification } from "@/features/hooks/auth/useRequestVerification";
+import { logout } from "@/lib/auth/logout";
 
 export const NotVerifiedPage: FC = () => {
   const { user, isLoading, isError, isMailSent, errorMessage } =
     useRequestVerification();
-  const logout = useCallback(() => {
-    document.cookie = "access_token=;path=/;";
-    window.location.href = "/signin";
-  }, []);
 
   if (isLoading) {
     return <div>Loading user info...</div>;
   } else if (isError) {
     return <div>Error loading user info...</div>;
   } else if (!user) {
-    logout();
+    return null;
   } else if (user.is_verified) {
     window.location.href = "/";
   }
