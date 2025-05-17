@@ -1,16 +1,30 @@
 import type { FC } from "react";
 import { useCallback } from "react";
+import { useUser } from "@/features/swr/useUser";
 
 export const HomePage: FC = () => {
+  const { user, isLoading, isError } = useUser();
+
   const logout = useCallback(() => {
     document.cookie = "access_token=;path=/;";
-    window.location.href = "/signin"; // Redirect to the sign-in page
+    window.location.href = "/signin";
   }, []);
+
+  if (isLoading) {
+    return <div>Loading user info...</div>;
+  } else if (isError) {
+    return <div>Error loading user info...</div>;
+  } else if (!user) {
+    logout();
+    return null;
+  } else if (user && !user.is_verified) {
+    return (window.location.href = "/not-verified");
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold mb-4">Welcome to the Home Page</h1>
-      <p className="text-lg text-gray-700">This is a simple home page.</p>
+      <h1 className="text-4xl font-bold mb-4">Welcome, {user.email}!</h1>
+      <p className="text-lg text-gray-700">You have verified your account.</p>
 
       <button
         onClick={logout}

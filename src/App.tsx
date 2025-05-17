@@ -4,6 +4,8 @@ import { SigninPage } from "@/pages/SigninPage";
 import { SignupPage } from "@/pages/SIgnupPage";
 import { ForgotPasswordPage } from "@/pages/ForgotPasswordPage";
 import { ResetPasswordPage } from "@/pages/ResetPasswordPage";
+import { NotVerifiedPage } from "@/pages/NotVerifiedPage";
+import { VerifyTokenPage } from "@/pages/VerifyTokenPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
 import { PublicOnlyRoute } from "@/components/routes/PublicOnlyRoute";
@@ -21,6 +23,12 @@ const routes = [
     path: "/reset-password/:token",
     element: <ResetPasswordPage />,
     isPrivate: false,
+  },
+  { path: "/not-verified", element: <NotVerifiedPage />, isPrivate: true },
+  {
+    path: "/verify-token/:token",
+    element: <VerifyTokenPage />,
+    isPrivate: true,
   },
 ];
 
