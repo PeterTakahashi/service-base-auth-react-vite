@@ -1,5 +1,5 @@
 import type { components } from "@/types/api";
-import client from "@/lib/client";
+import { client } from "@/lib/client";
 
 export type SignUpRequestBody = components["schemas"]["UserCreate"];
 

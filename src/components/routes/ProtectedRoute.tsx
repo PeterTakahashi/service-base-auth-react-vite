@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import { getAccessTokenFromCookie } from "@/lib/auth";
+import { getAccessTokenFromCookie } from "@/lib/getAccessTokenFromCookie";
 
 type ProtectedRouteProps = {
   children: ReactNode;
