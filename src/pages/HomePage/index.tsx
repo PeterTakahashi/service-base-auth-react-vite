@@ -1,9 +1,10 @@
 import type { FC } from "react";
 import { useVerifiedUser } from "@/features/swr/useVerifiedUser";
-import { logout } from "@/lib/auth/logout";
+import { useLogout } from "@/features/hooks/auth/useLogout";
 
 export const HomePage: FC = () => {
   const { user, isLoading, isError } = useVerifiedUser();
+  const { logout } = useLogout();
 
   if (isLoading) {
     return <div>Loading user info...</div>;

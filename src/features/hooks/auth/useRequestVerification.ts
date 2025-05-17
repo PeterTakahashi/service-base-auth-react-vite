@@ -37,7 +37,6 @@ export function useRequestVerification() {
     user,
     isLoading,
     isError,
-    isMailSent,
     errorMessage,
   };
 }

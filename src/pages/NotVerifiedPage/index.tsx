@@ -1,10 +1,10 @@
 import { type FC } from "react";
 import { useRequestVerification } from "@/features/hooks/auth/useRequestVerification";
-import { logout } from "@/lib/auth/logout";
+import { useLogout } from "@/features/hooks/auth/useLogout";
 
 export const NotVerifiedPage: FC = () => {
-  const { user, isLoading, isError, isMailSent, errorMessage } =
-    useRequestVerification();
+  const { user, isLoading, isError, errorMessage } = useRequestVerification();
+  const { logout } = useLogout();
 
   if (isLoading) {
     return <div>Loading user info...</div>;
@@ -19,13 +19,9 @@ export const NotVerifiedPage: FC = () => {
       <h1 className="text-2xl font-bold mb-4">
         Your account is not verified yet!
       </h1>
-      {isMailSent ? (
-        <p className="text-green-600">
-          Verification email sent. Please check your inbox.
-        </p>
-      ) : (
-        <p>Sending verification email...</p>
-      )}
+      <p className="text-green-600">
+        Verification email sent. Please check your inbox.
+      </p>
       {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
       <button
         onClick={logout}
