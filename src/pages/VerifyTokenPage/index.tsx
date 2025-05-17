@@ -1,8 +1,8 @@
 import { type FC } from "react";
-import { useParams } from "react-router-dom";
+import { useVerifyToken } from "@/features/hooks/auth/useVerifyToken";
 
 export const VerifyTokenPage: FC = () => {
-  const { token } = useParams<{ token: string }>();
+  useVerifyToken();
 
-  return <div>{token}</div>;
+  return null
 };

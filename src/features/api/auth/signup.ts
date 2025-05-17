@@ -1,12 +1,9 @@
-import type { components } from "@/types/api";
 import { client } from "@/lib/client";
+import type { SignUpRequestBody } from "@/types/api/signup";
+import type { UserRead } from "@/types/api/user";
 
-export type SignUpRequestBody = components["schemas"]["UserCreate"];
-
-type SignUpResponse = components["schemas"]["BearerResponse"];
-
-export async function signUp(data: SignUpRequestBody): Promise<SignUpResponse> {
-  const response = await client.post<SignUpResponse>(
+export async function signUp(data: SignUpRequestBody): Promise<UserRead> {
+  const response = await client.post<UserRead>(
     "/auth/register/register",
     data,
     {

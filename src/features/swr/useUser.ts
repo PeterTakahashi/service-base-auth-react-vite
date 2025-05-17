@@ -1,9 +1,7 @@
 import useSWR from "swr";
 import { fetcher } from "@/features/swr/fetcher";
-import type { components } from "@/types/api";
 import { useNavigate } from "react-router-dom";
-
-type UserRead = components["schemas"]["UserRead"];
+import type { UserRead } from "@/types/api/user";
 
 export function useUser() {
   const {

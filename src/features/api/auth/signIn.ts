@@ -1,4 +1,4 @@
-import type { components } from "@/types/api";
+import type { components } from "@/types/api/base";
 import { client } from "@/lib/client";
 
 export type SignInRequestBody =

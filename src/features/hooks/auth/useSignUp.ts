@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
-import { signUp, type SignUpRequestBody } from "@/features/api/auth/signup";
+import { signUp } from "@/features/api/auth/signup";
+import { signIn, type SignInRequestBody } from "@/features/api/auth/signIn";
+import type { SignUpRequestBody } from "@/types/api/signup";
 import type { SignUpValues } from "@/components/forms/AuthForm";
 import { useNavigate } from "react-router-dom";
 
@@ -15,9 +17,17 @@ export function useSignUp() {
         password: data.password,
       };
 
-      const response = await signUp(requestBody);
-      document.cookie = `access_token=${response.access_token}; path=/;`;
-      navigate("/");
+      await signUp(requestBody);
+      const signIn$RequestBody: SignInRequestBody = {
+        username: data.email,
+        password: data.password,
+        scope: "",
+        grant_type: "password",
+      };
+
+      const signInResponse = await signIn(signIn$RequestBody);
+      document.cookie = `access_token=${signInResponse.access_token}; path=/;`;
+      navigate("/not-verified");
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
