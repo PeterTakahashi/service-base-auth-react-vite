@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { AuthForm, type SignUpValues } from "@/components/forms/AuthForm";
-import { signUp, type SignUpRequestBody } from "@/api/auth/signup";
+import { signUp, type SignUpRequestBody } from "@/features/api/auth/signup";
 
 export const SignupPage: FC = () => {
   const [errorMessage, setErrorMessage] = useState("");
