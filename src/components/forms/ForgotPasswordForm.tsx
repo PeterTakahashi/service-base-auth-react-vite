@@ -37,10 +37,6 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
           autoComplete="email"
           errorMessage={errors.email && errors.email.message}
         />
-
-        {errors.email && (
-          <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>
-        )}
       </div>
 
       <FormButton

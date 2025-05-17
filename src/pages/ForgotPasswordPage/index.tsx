@@ -1,14 +1,9 @@
 import type { FC } from "react";
-import { useCallback } from "react";
-import {
-  type ForgotPasswordValues,
-  ForgotPasswordForm,
-} from "@/components/forms/ForgotPasswordForm";
+import { ForgotPasswordForm } from "@/components/forms/ForgotPasswordForm";
+import { useForgotPassword } from "@/features/hooks/auth/useForgotPassword";
 
 export const ForgotPasswordPage: FC = () => {
-  const onSubmit = useCallback(async (values: ForgotPasswordValues) => {
-    console.log("Forgot password values", values);
-  }, []);
+  const { onSubmitForgotPassword, errorMessage } = useForgotPassword();
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -19,7 +14,13 @@ export const ForgotPasswordPage: FC = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <ForgotPasswordForm onSubmit={onSubmit} />
+        <ForgotPasswordForm onSubmit={onSubmitForgotPassword} />
+
+        {errorMessage && (
+          <p className="mt-4 text-center text-sm text-red-600">
+            {errorMessage}
+          </p>
+        )}
 
         <div className="mt-10 text-center text-sm/6 text-gray-500">
           Remembered your password?{" "}

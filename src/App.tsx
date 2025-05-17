@@ -3,6 +3,7 @@ import { HomePage } from "@/pages/HomePage";
 import { SigninPage } from "@/pages/SigninPage";
 import { SignupPage } from "@/pages/SIgnupPage";
 import { ForgotPasswordPage } from "@/pages/ForgotPasswordPage";
+import { SentResetPasswordMailPage } from "@/pages/SentResetPasswordMailPage";
 import { ResetPasswordPage } from "@/pages/ResetPasswordPage";
 import { NotVerifiedPage } from "@/pages/NotVerifiedPage";
 import { VerifyTokenPage } from "@/pages/VerifyTokenPage";
@@ -17,6 +18,11 @@ const routes = [
   {
     path: "/forgot-password",
     element: <ForgotPasswordPage />,
+    isPrivate: false,
+  },
+  {
+    path: "/sent-reset-password-mail",
+    element: <SentResetPasswordMailPage />,
     isPrivate: false,
   },
   {
