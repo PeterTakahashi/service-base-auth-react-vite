@@ -2,9 +2,11 @@ import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { signIn, type SignInRequestBody } from "@/features/api/auth/signIn";
 import type { SignInValues } from "@/components/forms/AuthForm";
+import { useNavigate } from "react-router-dom";
 
 export function useSignIn() {
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const onSubmitSignIn = async (data: SignInValues) => {
     try {
@@ -18,8 +20,7 @@ export function useSignIn() {
       const response = await signIn(requestBody);
 
       document.cookie = `access_token=${response.access_token}; path=/;`;
-
-      window.location.href = "/";
+      navigate("/");
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;

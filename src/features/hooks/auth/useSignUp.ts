@@ -2,9 +2,11 @@ import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { signUp, type SignUpRequestBody } from "@/features/api/auth/signup";
 import type { SignUpValues } from "@/components/forms/AuthForm";
+import { useNavigate } from "react-router-dom";
 
 export function useSignUp() {
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const onSubmitSignUp = async (data: SignUpValues) => {
     try {
@@ -15,7 +17,7 @@ export function useSignUp() {
 
       const response = await signUp(requestBody);
       document.cookie = `access_token=${response.access_token}; path=/;`;
-      window.location.href = "/";
+      navigate("/");
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;

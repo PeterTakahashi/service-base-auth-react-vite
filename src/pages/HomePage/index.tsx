@@ -1,9 +1,9 @@
 import type { FC } from "react";
-import { useUser } from "@/features/swr/useUser";
+import { useVerifiedUser } from "@/features/swr/useVerifiedUser";
 import { logout } from "@/lib/auth/logout";
 
 export const HomePage: FC = () => {
-  const { user, isLoading, isError } = useUser();
+  const { user, isLoading, isError } = useVerifiedUser();
 
   if (isLoading) {
     return <div>Loading user info...</div>;
@@ -11,8 +11,6 @@ export const HomePage: FC = () => {
     return <div>Error loading user info...</div>;
   } else if (!user) {
     return null;
-  } else if (user && !user.is_verified) {
-    return (window.location.href = "/not-verified");
   }
 
   return (

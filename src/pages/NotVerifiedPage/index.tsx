@@ -12,8 +12,6 @@ export const NotVerifiedPage: FC = () => {
     return <div>Error loading user info...</div>;
   } else if (!user) {
     return null;
-  } else if (user.is_verified) {
-    window.location.href = "/";
   }
 
   return (

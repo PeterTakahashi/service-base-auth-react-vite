@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@/features/swr/useUser";
 import { requestVerifyToken } from "@/features/api/auth/requestVerifyToken";
-import { logout } from "@/lib/auth/logout";
+import { useNavigate } from "react-router-dom";
+
 /**
  * If the user is unverified, automatically call `requestVerifyToken`.
  */
 export function useRequestVerification() {
   const { user, isLoading, isError } = useUser();
+  const navigate = useNavigate();
+
+  if (!isLoading && user && user.is_verified) {
+    navigate("/");
+  }
   const [isMailSent, setIsMailSent] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const doRequest = async () => {
-      if (!user) {
-        logout();
-        return;
-      }
-
+      if (!user) return;
       try {
         await requestVerifyToken(user.email);
         setIsMailSent(true);
