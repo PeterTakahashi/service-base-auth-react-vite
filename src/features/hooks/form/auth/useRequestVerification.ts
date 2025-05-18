@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@/features/hooks/swr/fetcher/user/useUser";
-import { requestVerifyToken } from "@/features/api/auth/requestVerifyToken";
+import { useRequestVerifyTokenMutation } from "@/features/hooks/swr/mutation/useRequestVerifyTokenMutation";
+
 import { useNavigate } from "react-router-dom";
 
 /**
@@ -9,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 export function useRequestVerification() {
   const { user, isLoading, isError } = useUser();
   const navigate = useNavigate();
+  const { trigger: requestVerifyToken } =
+    useRequestVerifyTokenMutation();
 
   if (!isLoading && user && user.is_verified) {
     navigate("/");
@@ -20,10 +23,9 @@ export function useRequestVerification() {
     const doRequest = async () => {
       if (!user) return;
       try {
-        await requestVerifyToken(user.email);
+        await requestVerifyToken({ email: user.email });
         setIsMailSent(true);
-      } catch (err) {
-        console.error(err);
+      } catch {
         setErrorMessage("Failed to send verification email.");
       }
     };
@@ -31,7 +33,7 @@ export function useRequestVerification() {
     if (!isLoading && user && !user.is_verified && !isMailSent) {
       doRequest();
     }
-  }, [isLoading, user, isMailSent]);
+  }, [isLoading, user, isMailSent, requestVerifyToken]);
 
   return {
     user,

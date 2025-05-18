@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useUser } from "@/features/hooks/swr/fetcher/user/useUser";
-import { verifyToken } from "@/features/api/auth/verifyToken";
+import { useVerifyTokenMutation } from "@/features/hooks/swr/mutation/useVerifyTokenMutation";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
@@ -8,6 +8,7 @@ export function useVerifyToken() {
   const { token } = useParams<{ token: string }>();
   const { user, isLoading, mutate } = useUser();
   const navigate = useNavigate();
+  const { trigger: verifyToken } = useVerifyTokenMutation();
 
   useEffect(() => {
     const doVerify = async () => {
@@ -18,8 +19,8 @@ export function useVerifyToken() {
       }
 
       try {
-        const user = await verifyToken({ token });
-        if (user.is_verified) {
+        const verifiedUser = await verifyToken({ token });
+        if (verifiedUser.is_verified) {
           navigate("/");
         } else {
           navigate("/not-verified");
@@ -31,6 +32,8 @@ export function useVerifyToken() {
 
     if (!isLoading && user && !user.is_verified && token) {
       doVerify();
+    } else if (!isLoading && user && user.is_verified) {
+      navigate("/");
     }
-  }, [isLoading, user, token, mutate, navigate]);
+  }, [isLoading, user, token, mutate, navigate, verifyToken]);
 }
