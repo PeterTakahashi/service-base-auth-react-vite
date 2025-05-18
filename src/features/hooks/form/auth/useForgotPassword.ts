@@ -1,27 +1,29 @@
-import { forgotPassword } from "@/features/api/auth/forgotPassword";
+import { useForgotPasswordMutation } from "@/features/hooks/swr/mutation/useForgotPasswordMutation";
 import { type ForgotPasswordValues } from "@/components/forms/ForgotPasswordForm";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const useForgotPassword = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { trigger: forgotPasswordTrigger, isMutating } =
+    useForgotPasswordMutation();
   const navigate = useNavigate();
+
   const onSubmitForgotPassword = useCallback(
     async (data: ForgotPasswordValues): Promise<void> => {
       try {
-        await forgotPassword(data);
+        await forgotPasswordTrigger(data);
         navigate("/sent-reset-password-mail");
       } catch {
-        setErrorMessage(
-          "An error occurred while sending the forgot password email. Please try again."
-        );
+        setErrorMessage("An error occurred while sending ...");
       }
     },
-    [navigate]
+    [navigate, forgotPasswordTrigger]
   );
 
   return {
     errorMessage,
     onSubmitForgotPassword,
+    isMutating,
   };
 };
