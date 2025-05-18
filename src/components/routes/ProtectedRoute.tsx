@@ -20,7 +20,7 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   } else if (isError) {
     return <div>Error loading user data</div>;
   } else if (!user) {
-    return <div>unauthrized</div>;
+    return;
   }
   return <>{children}</>;
 };
