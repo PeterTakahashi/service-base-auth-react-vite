@@ -4,15 +4,10 @@ import { UserEditForm } from "@/components/forms/UserEditForm";
 import { useEditUserForm } from "@/features/hooks/form/user/useEditUserForm";
 
 export const EditUserPage: FC = () => {
-  const { user, isLoading, isError } = useUser();
+  const { user } = useUser();
   const { onSubmitEditUser, errorMessage } = useEditUserForm();
 
-  if (isLoading) {
-    return <div>Loading user info...</div>;
-  }
-  if (!user || isError) {
-    return <div>Error or no user data...</div>;
-  }
+  if (!user) return;
 
   return (
     <div className="max-w-sm mx-auto mt-16">

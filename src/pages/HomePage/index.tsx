@@ -4,17 +4,11 @@ import { useLogout } from "@/features/hooks/auth/useLogout";
 import { useNavigate } from "react-router-dom";
 
 export const HomePage: FC = () => {
-  const { user, isLoading, isError } = useVerifiedUser();
+  const { user } = useVerifiedUser();
   const { logout } = useLogout();
   const navigate = useNavigate();
 
-  if (isLoading) {
-    return <div>Loading user info...</div>;
-  } else if (isError) {
-    return <div>Error loading user info...</div>;
-  } else if (!user) {
-    return null;
-  }
+  if (!user) return;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
