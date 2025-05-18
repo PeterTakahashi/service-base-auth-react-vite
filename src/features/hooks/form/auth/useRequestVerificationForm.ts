@@ -10,7 +10,9 @@ export function useRequestVerificationForm() {
   const { trigger: requestVerifyToken } = useRequestVerifyTokenMutation();
 
   if (!isLoading && user && user.is_verified) {
-    navigate("/");
+    navigate("/", {
+      state: { successMessage: "You are already verified." },
+    });
   }
 
   const [isMailSent, setIsMailSent] = useState(false);

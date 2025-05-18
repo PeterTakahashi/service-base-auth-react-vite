@@ -11,6 +11,7 @@ import { EditUserPage } from "@/pages/EditUserPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { ProtectedRoute } from "@/components/routes/ProtectedRoute";
 import { PublicOnlyRoute } from "@/components/routes/PublicOnlyRoute";
+import { ToastMessageHandler } from "@/components/common/ToastMessageHandler";
 
 const routes = [
   { path: "/", element: <HomePage />, isPrivate: true },
@@ -46,19 +47,22 @@ const routes = [
 
 function App() {
   return (
-    <Routes>
-      {routes.map((route) => {
-        // isPrivate is a boolean that indicates if the route is private or not
-        const element = route.isPrivate ? (
-          <ProtectedRoute>{route.element}</ProtectedRoute>
-        ) : (
-          <PublicOnlyRoute>{route.element}</PublicOnlyRoute>
-        );
-        return <Route key={route.path} path={route.path} element={element} />;
-      })}
+    <>
+      <ToastMessageHandler />
+      <Routes>
+        {routes.map((route) => {
+          // isPrivate is a boolean that indicates if the route is private or not
+          const element = route.isPrivate ? (
+            <ProtectedRoute>{route.element}</ProtectedRoute>
+          ) : (
+            <PublicOnlyRoute>{route.element}</PublicOnlyRoute>
+          );
+          return <Route key={route.path} path={route.path} element={element} />;
+        })}
 
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
   );
 }
 

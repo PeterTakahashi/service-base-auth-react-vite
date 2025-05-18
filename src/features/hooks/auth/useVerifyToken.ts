@@ -21,7 +21,9 @@ export function useVerifyToken() {
       try {
         const verifiedUser = await verifyToken({ token });
         if (verifiedUser.is_verified) {
-          navigate("/");
+          navigate("/", {
+            state: { successMessage: "Your email has been verified." },
+          });
         } else {
           navigate("/not-verified");
         }

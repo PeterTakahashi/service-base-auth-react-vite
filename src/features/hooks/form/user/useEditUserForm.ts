@@ -18,7 +18,9 @@ export function useEditUserForm() {
           requestData.email = data.email;
         }
         await editUserTrigger(requestData);
-        navigate("/");
+        navigate("/", {
+          state: { successMessage: "User updated successfully" },
+        });
       } catch (error) {
         setErrorMessage(parseAxiosErrorMessage(error));
       }
