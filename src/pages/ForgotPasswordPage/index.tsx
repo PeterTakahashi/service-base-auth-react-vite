@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import { ForgotPasswordForm } from "@/components/forms/ForgotPasswordForm";
-import { useForgotPassword } from "@/features/hooks/form/auth/useForgotPassword";
+import { useForgotPasswordForm } from "@/features/hooks/form/auth/useForgotPasswordForm";
 
 export const ForgotPasswordPage: FC = () => {
-  const { onSubmitForgotPassword, errorMessage } = useForgotPassword();
+  const { onSubmitForgotPassword, errorMessage } = useForgotPasswordForm();
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
