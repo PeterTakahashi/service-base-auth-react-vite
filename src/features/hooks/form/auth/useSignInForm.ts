@@ -20,7 +20,9 @@ export function useSignInForm() {
       });
 
       document.cookie = `access_token=${signInResponse.access_token}; path=/;`;
-      navigate("/");
+      navigate("/", {
+        state: { successMessage: "Logged in successfully" },
+      });
     } catch (error) {
       setErrorMessage(parseAxiosErrorMessage(error));
     }
