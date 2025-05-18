@@ -19,7 +19,7 @@ export const EditUserPage: FC = () => {
       <h1 className="text-2xl font-bold mb-4">Edit User</h1>
 
       <UserEditForm
-        defaultValues={{ email: user.email, password: "" }}
+        defaultValues={{ email: user.email }}
         onSubmit={onSubmitEditUser}
       />
 

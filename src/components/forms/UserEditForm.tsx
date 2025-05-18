@@ -46,18 +46,6 @@ export const UserEditForm: React.FC<UserEditFormProps> = ({
         />
       </div>
 
-      <div className="grid w-full max-w-sm items-center gap-1.5 mt-2">
-        <Label htmlFor="password">Password</Label>
-        <Input
-          type="password"
-          id="password"
-          placeholder="Password"
-          {...register("password")}
-          required
-          autoComplete="current-password"
-          errorMessage={errors.password && errors.password.message}
-        />
-      </div>
       <div>
         <FormButton
           type="submit"
