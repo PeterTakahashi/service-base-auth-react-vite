@@ -1,10 +1,5 @@
-import type { components } from "@/types/api/base";
 import { client } from "@/lib/client";
-
-export type SignInRequestBody =
-  components["schemas"]["Body_auth_jwt_login_auth_jwt_login_post"];
-
-type SignInResponse = components["schemas"]["BearerResponse"];
+import type { SignInRequestBody, SignInResponse } from "@/types/api/signIn";
 
 export async function signIn(data: SignInRequestBody): Promise<SignInResponse> {
   const formData = new URLSearchParams();
