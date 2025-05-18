@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import { useVerifiedUser } from "@/features/swr/useVerifiedUser";
-import { useLogout } from "@/features/hooks/auth/useLogout";
+import { useVerifiedUser } from "@/features/hooks/swr/fetcher/user/useVerifiedUser";
+import { useLogout } from "@/features/hooks/form/auth/useLogout";
 
 export const HomePage: FC = () => {
   const { user, isLoading, isError } = useVerifiedUser();

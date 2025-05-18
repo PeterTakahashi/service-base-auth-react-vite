@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { AuthForm } from "@/components/forms/AuthForm";
-import { useSignIn } from "@/features/hooks/auth/useSignIn";
+import { useSignIn } from "@/features/hooks/form/auth/useSignIn";
 
 export const SigninPage: FC = () => {
   const { onSubmitSignIn, errorMessage } = useSignIn();

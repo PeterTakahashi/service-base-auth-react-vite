@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useUser } from "@/features/swr/useUser";
+import { useUser } from "@/features/hooks/swr/fetcher/user/useUser";
 import { requestVerifyToken } from "@/features/api/auth/requestVerifyToken";
 import { useNavigate } from "react-router-dom";
 

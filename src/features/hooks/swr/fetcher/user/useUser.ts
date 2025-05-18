@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { fetcher } from "@/features/swr/fetcher";
+import { fetcher } from "@/features/hooks/swr/fetcher/fetcher";
 import { useNavigate } from "react-router-dom";
 import type { UserRead } from "@/types/api/user";
 

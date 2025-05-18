@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { ForgotPasswordForm } from "@/components/forms/ForgotPasswordForm";
-import { useForgotPassword } from "@/features/hooks/auth/useForgotPassword";
+import { useForgotPassword } from "@/features/hooks/form/auth/useForgotPassword";
 
 export const ForgotPasswordPage: FC = () => {
   const { onSubmitForgotPassword, errorMessage } = useForgotPassword();

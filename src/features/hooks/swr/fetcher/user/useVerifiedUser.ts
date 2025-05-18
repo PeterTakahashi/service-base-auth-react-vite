@@ -1,4 +1,4 @@
-import { useUser } from "@/features/swr/useUser";
+import { useUser } from "@/features/hooks/swr/fetcher/user/useUser";
 import { useNavigate } from "react-router-dom";
 
 export function useVerifiedUser() {

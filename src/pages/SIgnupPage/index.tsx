@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { AuthForm } from "@/components/forms/AuthForm";
-import { useSignUp } from "@/features/hooks/auth/useSignUp";
+import { useSignUp } from "@/features/hooks/form/auth/useSignUp";
 
 export const SignupPage: FC = () => {
   const { onSubmitSignUp, errorMessage } = useSignUp();

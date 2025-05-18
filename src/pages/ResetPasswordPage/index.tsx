@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { ResetPasswordForm } from "@/components/forms/ResetPasswordForm";
-import { useResetPassword } from "@/features/hooks/auth/useResetPassword";
+import { useResetPassword } from "@/features/hooks/form/auth/useResetPassword";
 
 export const ResetPasswordPage: FC = () => {
   const { onSubmitResetPassword, errorMessage } = useResetPassword();
