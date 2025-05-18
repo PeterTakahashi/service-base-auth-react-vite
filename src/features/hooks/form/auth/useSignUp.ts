@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { signUp } from "@/features/api/auth/signup";
-import { signIn, type SignInRequestBody } from "@/features/api/auth/signIn";
+import { signIn } from "@/features/api/auth/signIn";
+import type { SignInRequestBody } from "@/types/api/signIn";
 import type { SignUpRequestBody } from "@/types/api/signup";
 import type { SignUpValues } from "@/components/forms/AuthForm";
 import { useNavigate } from "react-router-dom";
