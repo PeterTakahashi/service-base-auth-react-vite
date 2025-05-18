@@ -1,14 +1,16 @@
-import { resetPassword } from "@/features/api/auth/resetPassword";
-import { type ResetPasswordValues } from "@/components/forms/ResetPasswordForm";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
+
+import type { ResetPasswordValues } from "@/components/forms/ResetPasswordForm";
+import { useResetPasswordMutation } from "@/features/hooks/swr/mutation/useResetPasswordMutation";
 
 export const useResetPassword = () => {
   const { token } = useParams<{ token: string }>();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const { trigger, isMutating } = useResetPasswordMutation();
 
   const onSubmitResetPassword = useCallback(
     async (values: ResetPasswordValues) => {
@@ -18,7 +20,7 @@ export const useResetPassword = () => {
         return;
       }
       try {
-        await resetPassword({
+        await trigger({
           password,
           token,
         });
@@ -30,6 +32,7 @@ export const useResetPassword = () => {
           const errorData = axiosError.response?.data as
             | { detail?: string }
             | undefined;
+
           if (errorData?.detail === "RESET_PASSWORD_BAD_TOKEN") {
             setErrorMessage(
               "The token is invalid or has expired. Please request a new password reset."
@@ -47,10 +50,12 @@ export const useResetPassword = () => {
         }
       }
     },
-    [token, navigate]
+    [token, navigate, trigger]
   );
+
   return {
     onSubmitResetPassword,
     errorMessage,
+    isMutating,
   };
 };
