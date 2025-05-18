@@ -26,41 +26,43 @@ export const ResetPasswordForm: React.FC<ResetPasswordProps> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <div className="grid w-full max-w-sm items-center gap-1.5 mt-2">
-        <Label htmlFor="password">New Password</Label>
-        <Input
-          type="password"
-          id="password"
-          placeholder="Password"
-          {...register("password")}
-          required
-          autoComplete="current-password"
-          errorMessage={errors.password && errors.password.message}
-        />
-      </div>
+      <div className="w-full max-w-sm mx-auto">
+        <div className="grid items-center gap-1.5 mt-2">
+          <Label htmlFor="password">New Password</Label>
+          <Input
+            type="password"
+            id="password"
+            placeholder="Password"
+            {...register("password")}
+            required
+            autoComplete="current-password"
+            errorMessage={errors.password && errors.password.message}
+          />
+        </div>
 
-      <div className="grid w-full max-w-sm items-center gap-1.5 mt-2">
-        <Label htmlFor="confirmPassword"> Confirm Password</Label>
-        <Input
-          type="password"
-          id="confirmPassword"
-          placeholder="Confirm Password"
-          {...register("confirmPassword")}
-          required
-          autoComplete="current-password"
-          errorMessage={
-            errors.confirmPassword && errors.confirmPassword.message
-          }
-        />
-      </div>
+        <div className="grid items-center gap-1.5 mt-2">
+          <Label htmlFor="confirmPassword"> Confirm Password</Label>
+          <Input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            {...register("confirmPassword")}
+            required
+            autoComplete="current-password"
+            errorMessage={
+              errors.confirmPassword && errors.confirmPassword.message
+            }
+          />
+        </div>
 
-      <FormButton
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full rounded-md mt-4"
-      >
-        {isSubmitting ? "Sending..." : "Reset Password"}
-      </FormButton>
+        <FormButton
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full rounded-md mt-4"
+        >
+          {isSubmitting ? "Sending..." : "Reset Password"}
+        </FormButton>
+      </div>
     </form>
   );
 };

@@ -33,37 +33,37 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode, onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6">
-      <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="email">Email</Label>
-        <Input
-          type="email"
-          id="email"
-          placeholder="Email"
-          {...register("email")}
-          required
-          autoComplete="email"
-          errorMessage={errors.email && errors.email.message}
-        />
-      </div>
+      <div className="w-full max-w-sm mx-auto">
+        <div className="grid items-center gap-1.5">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            type="email"
+            id="email"
+            placeholder="Email"
+            {...register("email")}
+            required
+            autoComplete="email"
+            errorMessage={errors.email && errors.email.message}
+          />
+        </div>
 
-      <div className="grid w-full max-w-sm items-center gap-1.5 mt-2">
-        <Label htmlFor="password">Password</Label>
-        <Input
-          type="password"
-          id="password"
-          placeholder="Password"
-          {...register("password")}
-          required
-          autoComplete="current-password"
-          errorMessage={errors.password && errors.password.message}
-        />
-      </div>
+        <div className="grid items-center gap-1.5 mt-2">
+          <Label htmlFor="password">Password</Label>
+          <Input
+            type="password"
+            id="password"
+            placeholder="Password"
+            {...register("password")}
+            required
+            autoComplete="current-password"
+            errorMessage={errors.password && errors.password.message}
+          />
+        </div>
 
-      <div>
         <FormButton
           type="submit"
           disabled={isSubmitting}
-          className="flex w-full justify-center"
+          className="flex w-full justify-center mt-8"
         >
           {isSubmitting ? "Sending..." : isSignUp ? "Sign up" : "Sign in"}
         </FormButton>

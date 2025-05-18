@@ -26,26 +26,28 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="email">Email</Label>
-        <Input
-          type="email"
-          id="email"
-          placeholder="Email"
-          {...register("email")}
-          required
-          autoComplete="email"
-          errorMessage={errors.email && errors.email.message}
-        />
-      </div>
+      <div className="w-full max-w-sm mx-auto">
+        <div className="grid items-center gap-1.5">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            type="email"
+            id="email"
+            placeholder="Email"
+            {...register("email")}
+            required
+            autoComplete="email"
+            errorMessage={errors.email && errors.email.message}
+          />
+        </div>
 
-      <FormButton
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full rounded-md"
-      >
-        {isSubmitting ? "Sending..." : "Send Reset Link"}
-      </FormButton>
+        <FormButton
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full rounded-md mt-4"
+        >
+          {isSubmitting ? "Sending..." : "Send Reset Link"}
+        </FormButton>
+      </div>
     </form>
   );
 };
