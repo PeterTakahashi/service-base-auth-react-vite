@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useVerifiedUser } from "@/features/hooks/swr/fetcher/user/useVerifiedUser";
-import { useLogout } from "@/features/hooks/form/auth/useLogout";
+import { useLogout } from "@/features/hooks/auth/useLogout";
 import { useNavigate } from "react-router-dom";
 
 export const HomePage: FC = () => {

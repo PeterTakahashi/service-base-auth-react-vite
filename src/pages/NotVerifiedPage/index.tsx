@@ -1,9 +1,10 @@
 import { type FC } from "react";
 import { useRequestVerificationForm } from "@/features/hooks/form/auth/useRequestVerificationForm";
-import { useLogout } from "@/features/hooks/form/auth/useLogout";
+import { useLogout } from "@/features/hooks/auth/useLogout";
 
 export const NotVerifiedPage: FC = () => {
-  const { user, isLoading, isError, errorMessage } = useRequestVerificationForm();
+  const { user, isLoading, isError, errorMessage } =
+    useRequestVerificationForm();
   const { logout } = useLogout();
 
   if (isLoading) {
