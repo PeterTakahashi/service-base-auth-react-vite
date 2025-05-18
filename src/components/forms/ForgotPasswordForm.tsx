@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
-import { forgotPasswordSchema } from "@/schemas/auth";
+import { forgotPasswordSchema } from "@/features/zodSchemas/auth/forgotPasswordSchema";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { FormButton } from "@/components/ui/FormButton";
