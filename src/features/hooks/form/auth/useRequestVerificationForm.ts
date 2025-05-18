@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "@/features/hooks/swr/fetcher/user/useUser";
 import { useRequestVerifyTokenMutation } from "@/features/hooks/swr/mutation/useRequestVerifyTokenMutation";
 import { useNavigate } from "react-router-dom";
-import axios, { AxiosError } from "axios";
-import type { ErrorModel } from "@/types/api/errorModel";
+import { parseAxiosErrorMessage } from "@/lib/parseAxiosErrorMessage";
 
 export function useRequestVerificationForm() {
   const { user, isLoading, isError } = useUser();
@@ -24,47 +23,8 @@ export function useRequestVerificationForm() {
       try {
         await requestVerifyToken({ email: user.email });
         setIsMailSent(true);
-      } catch (error: unknown) {
-        if (axios.isAxiosError(error)) {
-          const axiosError = error as AxiosError<ErrorModel>;
-          const status = axiosError.response?.status;
-          const data = axiosError.response?.data;
-
-          switch (status) {
-            case 401:
-              setErrorMessage(
-                typeof data?.detail === "string"
-                  ? data.detail
-                  : "Unauthorized. Please sign in again."
-              );
-              break;
-
-            case 422:
-              if (typeof data?.detail === "string") {
-                setErrorMessage(data.detail);
-              } else {
-                setErrorMessage("Validation Error. Please check your input.");
-              }
-              break;
-
-            case 500:
-              setErrorMessage(
-                "A server error occurred. Please try again later."
-              );
-              break;
-
-            default:
-              setErrorMessage(
-                typeof data?.detail === "string"
-                  ? data.detail
-                  : "Failed to send verification email."
-              );
-          }
-        } else {
-          setErrorMessage(
-            "An unexpected error occurred. Please try again later."
-          );
-        }
+      } catch (error) {
+        setErrorMessage(parseAxiosErrorMessage(error));
       }
     };
 

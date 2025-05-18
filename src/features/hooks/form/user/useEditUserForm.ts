@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEditUserMutation } from "@/features/hooks/swr/mutation/useEditUserMutation";
 import type { UserEditValues } from "@/components/forms/UserEditForm";
 import { type UserUpdate } from "@/types/api/user";
+import { parseAxiosErrorMessage } from "@/lib/parseAxiosErrorMessage";
 
 export function useEditUserForm() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -18,9 +19,8 @@ export function useEditUserForm() {
         }
         await editUserTrigger(requestData);
         navigate("/");
-      } catch {
-        const errorMsg = "Failed to update user data.";
-        setErrorMessage(errorMsg);
+      } catch (error) {
+        setErrorMessage(parseAxiosErrorMessage(error));
       }
     },
     [editUserTrigger, navigate]
