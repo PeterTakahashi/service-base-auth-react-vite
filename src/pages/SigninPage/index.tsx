@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import { AuthForm } from "@/components/forms/AuthForm";
-import { useSignIn } from "@/features/hooks/form/auth/useSignIn";
+import { useSignInForm } from "@/features/hooks/form/auth/useSignInForm";
 
 export const SigninPage: FC = () => {
-  const { onSubmitSignIn, errorMessage } = useSignIn();
+  const { onSubmitSignIn, errorMessage } = useSignInForm();
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

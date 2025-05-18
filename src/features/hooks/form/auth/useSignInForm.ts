@@ -5,7 +5,7 @@ import axios, { AxiosError } from "axios";
 import { useSignInMutation } from "@/features/hooks/swr/mutation/useSignInMutation";
 import type { SignInValues } from "@/components/forms/AuthForm";
 
-export function useSignIn() {
+export function useSignInForm() {
   const navigate = useNavigate();
   const { trigger, isMutating } = useSignInMutation();
   const [errorMessage, setErrorMessage] = useState("");

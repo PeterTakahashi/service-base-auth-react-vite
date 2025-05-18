@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import { ResetPasswordForm } from "@/components/forms/ResetPasswordForm";
-import { useResetPassword } from "@/features/hooks/form/auth/useResetPassword";
+import { useResetPasswordForm } from "@/features/hooks/form/auth/useResetPasswordForm";
 
 export const ResetPasswordPage: FC = () => {
-  const { onSubmitResetPassword, errorMessage } = useResetPassword();
+  const { onSubmitResetPassword, errorMessage } = useResetPasswordForm();
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

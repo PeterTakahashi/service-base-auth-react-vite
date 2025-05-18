@@ -5,7 +5,7 @@ import axios, { AxiosError } from "axios";
 import type { ResetPasswordValues } from "@/components/forms/ResetPasswordForm";
 import { useResetPasswordMutation } from "@/features/hooks/swr/mutation/useResetPasswordMutation";
 
-export const useResetPassword = () => {
+export const useResetPasswordForm = () => {
   const { token } = useParams<{ token: string }>();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();

@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import { AuthForm } from "@/components/forms/AuthForm";
-import { useSignUp } from "@/features/hooks/form/auth/useSignUp";
+import { useSignUpForm } from "@/features/hooks/form/auth/useSignUpForm";
 
 export const SignupPage: FC = () => {
-  const { onSubmitSignUp, errorMessage } = useSignUp();
+  const { onSubmitSignUp, errorMessage } = useSignUpForm();
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

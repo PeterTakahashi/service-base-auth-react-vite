@@ -7,11 +7,10 @@ import { useNavigate } from "react-router-dom";
 /**
  * If the user is unverified, automatically call `requestVerifyToken`.
  */
-export function useRequestVerification() {
+export function useRequestVerificationForm() {
   const { user, isLoading, isError } = useUser();
   const navigate = useNavigate();
-  const { trigger: requestVerifyToken } =
-    useRequestVerifyTokenMutation();
+  const { trigger: requestVerifyToken } = useRequestVerifyTokenMutation();
 
   if (!isLoading && user && user.is_verified) {
     navigate("/");

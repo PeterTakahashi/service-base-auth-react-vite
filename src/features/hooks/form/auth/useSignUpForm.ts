@@ -5,7 +5,7 @@ import { useSignUpMutation } from "@/features/hooks/swr/mutation/useSignUpMutati
 import { useSignInMutation } from "@/features/hooks/swr/mutation/useSignInMutation";
 import type { SignUpValues } from "@/components/forms/AuthForm";
 
-export function useSignUp() {
+export function useSignUpForm() {
   const navigate = useNavigate();
   const { trigger: signUpTrigger, isMutating: isSignUpMutating } =
     useSignUpMutation();
