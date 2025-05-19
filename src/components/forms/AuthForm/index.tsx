@@ -7,6 +7,8 @@ import { signInSchema } from "@/features/zodSchemas/auth/signInSchema";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { FormButton } from "@/components/ui/FormButton";
+import { GoogleIcon } from "@/components/icons/googleIcon";
+import { GithubIcon } from "@/components/icons/githubIcon";
 
 type AuthFormProps = {
   mode: "signup" | "signin";
@@ -60,6 +62,17 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode, onSubmit }) => {
           />
         </div>
 
+        {!isSignUp && (
+          <div>
+            <a
+              href="/forgot-password"
+              className="font-semibold text-sm text-right text-teal-600 hover:text-teal-500"
+            >
+              Forgot password?
+            </a>
+          </div>
+        )}
+
         <FormButton
           type="submit"
           disabled={isSubmitting}
@@ -67,6 +80,40 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode, onSubmit }) => {
         >
           {isSubmitting ? "Sending..." : isSignUp ? "Sign up" : "Sign in"}
         </FormButton>
+
+        <div>
+          <div className="relative mt-10">
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 flex items-center"
+            >
+              <div className="w-full border-t border-gray-200" />
+            </div>
+            <div className="relative flex justify-center text-sm/6 font-medium">
+              <span className="bg-white px-6 text-gray-900">
+                Or continue with
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-2 gap-4">
+            <a
+              href="#"
+              className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus-visible:ring-transparent"
+            >
+              <GoogleIcon />
+              <span className="text-sm/6 font-semibold">Google</span>
+            </a>
+
+            <a
+              href="#"
+              className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus-visible:ring-transparent"
+            >
+              <GithubIcon />
+              <span className="text-sm/6 font-semibold">GitHub</span>
+            </a>
+          </div>
+        </div>
       </div>
     </form>
   );

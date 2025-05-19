@@ -24,14 +24,6 @@ export const SigninPage: FC = () => {
             Create an account
           </a>
         </div>
-        <div>
-          <a
-            href="/forgot-password"
-            className="font-semibold text-teal-600 hover:text-teal-500"
-          >
-            Forgot password?
-          </a>
-        </div>
       </div>
     </AuthLayout>
   );
