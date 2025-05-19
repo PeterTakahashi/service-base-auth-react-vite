@@ -204,23 +204,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "errors": [
-                    {
-                      "status": "401",
-                      "code": "unauthorized",
-                      "title": "Unauthorized",
-                      "detail": "Authentication credentials were not provided or are invalid."
-                    }
-                  ]
-                }
-              }
-            }
-          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -246,13 +229,6 @@
             "description": "Language preference (e.g., en, ja)",
             "required": false,
             "schema": { "type": "string", "example": "en" }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer token for authentication",
-            "required": true,
-            "schema": { "type": "string", "example": "Bearer <token>" }
           }
         ]
       }
@@ -295,13 +271,6 @@
             "description": "Language preference (e.g., en, ja)",
             "required": false,
             "schema": { "type": "string", "example": "en" }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer token for authentication",
-            "required": true,
-            "schema": { "type": "string", "example": "Bearer <token>" }
           }
         ]
       }
@@ -759,6 +728,370 @@
         ]
       }
     },
+    "/auth/google/authorize": {
+      "get": {
+        "tags": ["auth", "auth"],
+        "summary": "Oauth:Google.Jwt.Authorize",
+        "operationId": "oauth_google_jwt_authorize_auth_google_authorize_get",
+        "parameters": [
+          {
+            "name": "scopes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string" },
+              "title": "Scopes"
+            }
+          },
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language preference (e.g., en, ja)",
+            "required": false,
+            "schema": { "type": "string", "example": "en" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OAuth2AuthorizeResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "422",
+                      "code": "validation_error",
+                      "title": "Validation Error",
+                      "detail": "The field 'title' is required.",
+                      "source": { "parameter": "title" }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "500",
+                      "code": "internal_server_error",
+                      "title": "Internal Server Error",
+                      "detail": "An unexpected error occurred. Please try again later."
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/google/callback": {
+      "get": {
+        "tags": ["auth", "auth"],
+        "summary": "Oauth:Google.Jwt.Callback",
+        "description": "The response varies based on the authentication backend used.",
+        "operationId": "oauth_google_jwt_callback_auth_google_callback_get",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Code"
+            }
+          },
+          {
+            "name": "code_verifier",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Code Verifier"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "State"
+            }
+          },
+          {
+            "name": "error",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Error"
+            }
+          },
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language preference (e.g., en, ja)",
+            "required": false,
+            "schema": { "type": "string", "example": "en" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "INVALID_STATE_TOKEN": { "summary": "Invalid state token." },
+                  "LOGIN_BAD_CREDENTIALS": {
+                    "summary": "User is inactive.",
+                    "value": { "detail": "LOGIN_BAD_CREDENTIALS" }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorModel" }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "422",
+                      "code": "validation_error",
+                      "title": "Validation Error",
+                      "detail": "The field 'title' is required.",
+                      "source": { "parameter": "title" }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "500",
+                      "code": "internal_server_error",
+                      "title": "Internal Server Error",
+                      "detail": "An unexpected error occurred. Please try again later."
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/github/authorize": {
+      "get": {
+        "tags": ["auth", "auth"],
+        "summary": "Oauth:Github.Jwt.Authorize",
+        "operationId": "oauth_github_jwt_authorize_auth_github_authorize_get",
+        "parameters": [
+          {
+            "name": "scopes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": { "type": "string" },
+              "title": "Scopes"
+            }
+          },
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language preference (e.g., en, ja)",
+            "required": false,
+            "schema": { "type": "string", "example": "en" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OAuth2AuthorizeResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "422",
+                      "code": "validation_error",
+                      "title": "Validation Error",
+                      "detail": "The field 'title' is required.",
+                      "source": { "parameter": "title" }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "500",
+                      "code": "internal_server_error",
+                      "title": "Internal Server Error",
+                      "detail": "An unexpected error occurred. Please try again later."
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/github/callback": {
+      "get": {
+        "tags": ["auth", "auth"],
+        "summary": "Oauth:Github.Jwt.Callback",
+        "description": "The response varies based on the authentication backend used.",
+        "operationId": "oauth_github_jwt_callback_auth_github_callback_get",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Code"
+            }
+          },
+          {
+            "name": "code_verifier",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Code Verifier"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "State"
+            }
+          },
+          {
+            "name": "error",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Error"
+            }
+          },
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language preference (e.g., en, ja)",
+            "required": false,
+            "schema": { "type": "string", "example": "en" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "INVALID_STATE_TOKEN": { "summary": "Invalid state token." },
+                  "LOGIN_BAD_CREDENTIALS": {
+                    "summary": "User is inactive.",
+                    "value": { "detail": "LOGIN_BAD_CREDENTIALS" }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorModel" }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "422",
+                      "code": "validation_error",
+                      "title": "Validation Error",
+                      "detail": "The field 'title' is required.",
+                      "source": { "parameter": "title" }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "500",
+                      "code": "internal_server_error",
+                      "title": "Internal Server Error",
+                      "detail": "An unexpected error occurred. Please try again later."
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/me": {
       "get": {
         "tags": ["users"],
@@ -1059,6 +1392,17 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "OAuth2AuthorizeResponse": {
+        "properties": {
+          "authorization_url": {
+            "type": "string",
+            "title": "Authorization Url"
+          }
+        },
+        "type": "object",
+        "required": ["authorization_url"],
+        "title": "OAuth2AuthorizeResponse"
       },
       "UserCreate": {
         "properties": {
