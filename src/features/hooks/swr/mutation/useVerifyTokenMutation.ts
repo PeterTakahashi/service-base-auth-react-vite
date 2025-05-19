@@ -1,7 +1,7 @@
 import useSWRMutation from "swr/mutation";
 import { client } from "@/lib/client";
-import type { verifyTokenRequestBody } from "@/types/api/verifyToken";
-import type { UserRead } from "@/types/api/user";
+import type { verifyTokenRequestBody } from "@/types/api/auth/verifyToken";
+import type { UserRead } from "@/types/api/user/user";
 
 async function verifyTokenRequest(
   url: string,

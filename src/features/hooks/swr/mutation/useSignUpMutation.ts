@@ -1,7 +1,7 @@
 import useSWRMutation from "swr/mutation";
 import { client } from "@/lib/client";
-import type { SignUpRequestBody } from "@/types/api/signup";
-import type { UserRead } from "@/types/api/user";
+import type { SignUpRequestBody } from "@/types/api/auth/signup";
+import type { UserRead } from "@/types/api/user/user";
 
 async function signUpRequest(
   url: string,

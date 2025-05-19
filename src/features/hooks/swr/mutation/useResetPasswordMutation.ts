@@ -1,6 +1,6 @@
 import useSWRMutation from "swr/mutation";
 import { client } from "@/lib/client";
-import type { ResetPasswordRequestBody } from "@/types/api/resetPassword";
+import type { ResetPasswordRequestBody } from "@/types/api/auth/resetPassword";
 
 async function resetPasswordRequest(
   url: string,

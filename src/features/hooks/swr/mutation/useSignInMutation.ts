@@ -1,6 +1,9 @@
 import useSWRMutation from "swr/mutation";
 import { client } from "@/lib/client";
-import type { SignInRequestBody, SignInResponse } from "@/types/api/signIn";
+import type {
+  SignInRequestBody,
+  SignInResponse,
+} from "@/types/api/auth/signIn";
 
 async function signInRequest(
   url: string,

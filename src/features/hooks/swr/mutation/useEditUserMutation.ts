@@ -1,6 +1,6 @@
 import useSWRMutation from "swr/mutation";
 import { client } from "@/lib/client";
-import type { UserUpdate, UserRead } from "@/types/api/user";
+import type { UserUpdate, UserRead } from "@/types/api/user/user";
 
 async function patchUser(
   url: string,

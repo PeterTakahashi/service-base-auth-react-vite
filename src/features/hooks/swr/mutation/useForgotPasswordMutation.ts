@@ -1,6 +1,6 @@
 import useSWRMutation from "swr/mutation";
 import { client } from "@/lib/client";
-import type { ForgotPasswordRequestBody } from "@/types/api/forgotPassword";
+import type { ForgotPasswordRequestBody } from "@/types/api/auth/forgotPassword";
 
 async function forgotPasswordRequest(
   url: string,
