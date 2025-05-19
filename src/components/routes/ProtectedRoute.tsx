@@ -1,20 +1,19 @@
 import type { FC, ReactNode } from "react";
-import { Navigate } from "react-router-dom";
-import { getAccessTokenFromCookie } from "@/lib/auth/getAccessTokenFromCookie";
 import { useUser } from "@/features/hooks/swr/fetcher/user/useUser";
 import { Loading } from "@/components/ui/Loading";
 import { ErrorDisplay } from "@/components/ui/ErrorDisplay";
+import { useNavigate } from "react-router-dom";
 
 type ProtectedRouteProps = {
   children: ReactNode;
 };
 
 export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
-  const accessToken = getAccessTokenFromCookie();
   const { user, isLoading, isError } = useUser();
+  const navigate = useNavigate();
 
-  if (!accessToken) {
-    return <Navigate to="/signin" replace />;
+  if (!isLoading && !user) {
+    navigate("/signin");
   }
 
   if (isLoading) {

@@ -26,7 +26,7 @@ async function signInRequest(
 
 export function useSignInMutation() {
   const { trigger, isMutating, data, error } = useSWRMutation(
-    "/auth/jwt/login",
+    "/auth/cookie/login",
     signInRequest
   );
 

@@ -12,14 +12,12 @@ export function useSignInForm() {
 
   const onSubmitSignIn = async (data: SignInValues) => {
     try {
-      const signInResponse = await trigger({
+      await trigger({
         username: data.email,
         password: data.password,
         scope: "",
         grant_type: "password",
       });
-
-      document.cookie = `access_token=${signInResponse.access_token}; path=/;`;
       navigate("/", {
         state: { successMessage: "Logged in successfully" },
       });

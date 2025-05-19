@@ -1,11 +1,11 @@
 import useSWRMutation from "swr/mutation";
-import { authClient } from "@/lib/authClient";
+import { client } from "@/lib/client";
 
 async function requestVerifyTokenRequest(
   url: string,
   { arg }: { arg: { email: string } }
 ): Promise<void> {
-  await authClient.post(url, { email: arg.email });
+  await client.post(url, { email: arg.email });
 }
 
 export function useRequestVerifyTokenMutation() {

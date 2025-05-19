@@ -21,14 +21,12 @@ export function useSignUpForm() {
         email: data.email,
         password: data.password,
       });
-      const signInResponse = await signInTrigger({
+      await signInTrigger({
         username: data.email,
         password: data.password,
         scope: "",
         grant_type: "password",
       });
-
-      document.cookie = `access_token=${signInResponse.access_token}; path=/;`;
 
       navigate("/not-verified");
     } catch (error) {

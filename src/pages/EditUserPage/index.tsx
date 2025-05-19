@@ -1,10 +1,10 @@
 import type { FC } from "react";
-import { useUser } from "@/features/hooks/swr/fetcher/user/useUser";
+import { useVerifiedUser } from "@/features/hooks/swr/fetcher/user/useVerifiedUser";
 import { UserEditForm } from "@/components/forms/UserEditForm";
 import { useEditUserForm } from "@/features/hooks/form/user/useEditUserForm";
 
 export const EditUserPage: FC = () => {
-  const { user } = useUser();
+  const { user } = useVerifiedUser();
   const { onSubmitEditUser, errorMessage } = useEditUserForm();
 
   if (!user) return;

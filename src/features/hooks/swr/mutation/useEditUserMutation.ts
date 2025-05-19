@@ -1,12 +1,12 @@
 import useSWRMutation from "swr/mutation";
-import { authClient } from "@/lib/authClient";
+import { client } from "@/lib/client";
 import type { UserUpdate, UserRead } from "@/types/api/user";
 
 async function patchUser(
   url: string,
   { arg }: { arg: UserUpdate }
 ): Promise<UserRead> {
-  const response = await authClient.patch<UserRead>(url, arg);
+  const response = await client.patch<UserRead>(url, arg);
   return response.data;
 }
 
