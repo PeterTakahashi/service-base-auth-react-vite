@@ -12,7 +12,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
   serviceName = "ServiceBase",
 }) => {
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-50">
+    <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:max-w-md">
         <div className="flex justify-center">
           <span className="text-3xl font-bold">{serviceName}</span>
