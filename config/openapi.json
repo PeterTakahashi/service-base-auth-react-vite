@@ -728,11 +728,11 @@
         ]
       }
     },
-    "/auth/google/authorize": {
+    "/auth/cookie/google/authorize": {
       "get": {
         "tags": ["auth", "auth"],
-        "summary": "Oauth:Google.Jwt.Authorize",
-        "operationId": "oauth_google_jwt_authorize_auth_google_authorize_get",
+        "summary": "Oauth:Google.Cookie.Authorize",
+        "operationId": "oauth_google_cookie_authorize_auth_cookie_google_authorize_get",
         "parameters": [
           {
             "name": "scopes",
@@ -750,6 +750,13 @@
             "description": "Language preference (e.g., en, ja)",
             "required": false,
             "schema": { "type": "string", "example": "en" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": { "type": "string", "example": "Bearer <token>" }
           }
         ],
         "responses": {
@@ -781,6 +788,23 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "401",
+                      "code": "unauthorized",
+                      "title": "Unauthorized",
+                      "detail": "Authentication credentials were not provided or are invalid."
+                    }
+                  ]
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -801,12 +825,12 @@
         }
       }
     },
-    "/auth/google/callback": {
+    "/auth/cookie/google/callback": {
       "get": {
         "tags": ["auth", "auth"],
-        "summary": "Oauth:Google.Jwt.Callback",
+        "summary": "Oauth:Google.Cookie.Callback",
         "description": "The response varies based on the authentication backend used.",
-        "operationId": "oauth_google_jwt_callback_auth_google_callback_get",
+        "operationId": "oauth_google_cookie_callback_auth_cookie_google_callback_get",
         "parameters": [
           {
             "name": "code",
@@ -850,6 +874,13 @@
             "description": "Language preference (e.g., en, ja)",
             "required": false,
             "schema": { "type": "string", "example": "en" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": { "type": "string", "example": "Bearer <token>" }
           }
         ],
         "responses": {
@@ -890,6 +921,23 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "401",
+                      "code": "unauthorized",
+                      "title": "Unauthorized",
+                      "detail": "Authentication credentials were not provided or are invalid."
+                    }
+                  ]
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -910,11 +958,11 @@
         }
       }
     },
-    "/auth/github/authorize": {
+    "/auth/cookie/github/authorize": {
       "get": {
         "tags": ["auth", "auth"],
-        "summary": "Oauth:Github.Jwt.Authorize",
-        "operationId": "oauth_github_jwt_authorize_auth_github_authorize_get",
+        "summary": "Oauth:Github.Cookie.Authorize",
+        "operationId": "oauth_github_cookie_authorize_auth_cookie_github_authorize_get",
         "parameters": [
           {
             "name": "scopes",
@@ -932,6 +980,13 @@
             "description": "Language preference (e.g., en, ja)",
             "required": false,
             "schema": { "type": "string", "example": "en" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": { "type": "string", "example": "Bearer <token>" }
           }
         ],
         "responses": {
@@ -963,6 +1018,23 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "401",
+                      "code": "unauthorized",
+                      "title": "Unauthorized",
+                      "detail": "Authentication credentials were not provided or are invalid."
+                    }
+                  ]
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -983,12 +1055,12 @@
         }
       }
     },
-    "/auth/github/callback": {
+    "/auth/cookie/github/callback": {
       "get": {
         "tags": ["auth", "auth"],
-        "summary": "Oauth:Github.Jwt.Callback",
+        "summary": "Oauth:Github.Cookie.Callback",
         "description": "The response varies based on the authentication backend used.",
-        "operationId": "oauth_github_jwt_callback_auth_github_callback_get",
+        "operationId": "oauth_github_cookie_callback_auth_cookie_github_callback_get",
         "parameters": [
           {
             "name": "code",
@@ -1032,6 +1104,13 @@
             "description": "Language preference (e.g., en, ja)",
             "required": false,
             "schema": { "type": "string", "example": "en" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": { "type": "string", "example": "Bearer <token>" }
           }
         ],
         "responses": {
@@ -1066,6 +1145,23 @@
                       "title": "Validation Error",
                       "detail": "The field 'title' is required.",
                       "source": { "parameter": "title" }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "401",
+                      "code": "unauthorized",
+                      "title": "Unauthorized",
+                      "detail": "Authentication credentials were not provided or are invalid."
                     }
                   ]
                 }

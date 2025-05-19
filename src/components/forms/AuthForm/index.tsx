@@ -7,18 +7,23 @@ import { signInSchema } from "@/features/zodSchemas/auth/signInSchema";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { FormButton } from "@/components/ui/FormButton";
-import { GoogleIcon } from "@/components/icons/googleIcon";
 import { GithubAuthButton } from "@/components/ui/GithubAuthButton";
+import { GoogleAuthButton } from "@/components/ui/GoogleAuthButton";
 
 type AuthFormProps = {
   mode: "signup" | "signin";
+  errorMessage: string;
   onSubmit: (data: SignUpValues | SignInValues) => void;
 };
 
 export type SignUpValues = z.infer<typeof signUpSchema>;
 export type SignInValues = z.infer<typeof signInSchema>;
 
-export const AuthForm: React.FC<AuthFormProps> = ({ mode, onSubmit }) => {
+export const AuthForm: React.FC<AuthFormProps> = ({
+  mode,
+  errorMessage,
+  onSubmit,
+}) => {
   const isSignUp = mode === "signup";
 
   const {
@@ -62,6 +67,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode, onSubmit }) => {
           />
         </div>
 
+        {errorMessage && (
+          <p className="mt-4 text-center text-sm text-red-600">
+            {errorMessage}
+          </p>
+        )}
+
         {!isSignUp && (
           <div>
             <a
@@ -97,14 +108,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode, onSubmit }) => {
           </div>
 
           <div className="mt-6 grid grid-cols-2 gap-4">
-            <a
-              href="#"
-              className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus-visible:ring-transparent"
-            >
-              <GoogleIcon />
-              <span className="text-sm/6 font-semibold">Google</span>
-            </a>
-
+            <GoogleAuthButton />
             <GithubAuthButton />
           </div>
         </div>

@@ -157,15 +157,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/auth/google/authorize": {
+    "/auth/cookie/google/authorize": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Oauth:Google.Jwt.Authorize */
-        get: operations["oauth_google_jwt_authorize_auth_google_authorize_get"];
+        /** Oauth:Google.Cookie.Authorize */
+        get: operations["oauth_google_cookie_authorize_auth_cookie_google_authorize_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -174,7 +174,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/auth/google/callback": {
+    "/auth/cookie/google/callback": {
         parameters: {
             query?: never;
             header?: never;
@@ -182,10 +182,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Oauth:Google.Jwt.Callback
+         * Oauth:Google.Cookie.Callback
          * @description The response varies based on the authentication backend used.
          */
-        get: operations["oauth_google_jwt_callback_auth_google_callback_get"];
+        get: operations["oauth_google_cookie_callback_auth_cookie_google_callback_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -194,15 +194,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/auth/github/authorize": {
+    "/auth/cookie/github/authorize": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Oauth:Github.Jwt.Authorize */
-        get: operations["oauth_github_jwt_authorize_auth_github_authorize_get"];
+        /** Oauth:Github.Cookie.Authorize */
+        get: operations["oauth_github_cookie_authorize_auth_cookie_github_authorize_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -211,7 +211,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/auth/github/callback": {
+    "/auth/cookie/github/callback": {
         parameters: {
             query?: never;
             header?: never;
@@ -219,10 +219,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Oauth:Github.Jwt.Callback
+         * Oauth:Github.Cookie.Callback
          * @description The response varies based on the authentication backend used.
          */
-        get: operations["oauth_github_jwt_callback_auth_github_callback_get"];
+        get: operations["oauth_github_cookie_callback_auth_cookie_github_callback_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1086,14 +1086,16 @@ export interface operations {
             };
         };
     };
-    oauth_google_jwt_authorize_auth_google_authorize_get: {
+    oauth_google_cookie_authorize_auth_cookie_google_authorize_get: {
         parameters: {
             query?: {
                 scopes?: string[];
             };
-            header?: {
+            header: {
                 /** @description Language preference (e.g., en, ja) */
                 "Accept-Language"?: string;
+                /** @description Bearer token for authentication */
+                Authorization: string;
             };
             path?: never;
             cookie?: never;
@@ -1107,6 +1109,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["OAuth2AuthorizeResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /** @example {
+                     *       "errors": [
+                     *         {
+                     *           "status": "401",
+                     *           "code": "unauthorized",
+                     *           "title": "Unauthorized",
+                     *           "detail": "Authentication credentials were not provided or are invalid."
+                     *         }
+                     *       ]
+                     *     } */
+                    "application/json": unknown;
                 };
             };
             /** @description Validation Error */
@@ -1152,7 +1173,7 @@ export interface operations {
             };
         };
     };
-    oauth_google_jwt_callback_auth_google_callback_get: {
+    oauth_google_cookie_callback_auth_cookie_google_callback_get: {
         parameters: {
             query?: {
                 code?: string | null;
@@ -1160,9 +1181,11 @@ export interface operations {
                 state?: string | null;
                 error?: string | null;
             };
-            header?: {
+            header: {
                 /** @description Language preference (e.g., en, ja) */
                 "Accept-Language"?: string;
+                /** @description Bearer token for authentication */
+                Authorization: string;
             };
             path?: never;
             cookie?: never;
@@ -1187,6 +1210,25 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorModel"];
                 };
             };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /** @example {
+                     *       "errors": [
+                     *         {
+                     *           "status": "401",
+                     *           "code": "unauthorized",
+                     *           "title": "Unauthorized",
+                     *           "detail": "Authentication credentials were not provided or are invalid."
+                     *         }
+                     *       ]
+                     *     } */
+                    "application/json": unknown;
+                };
+            };
             /** @description Validation Error */
             422: {
                 headers: {
@@ -1230,14 +1272,16 @@ export interface operations {
             };
         };
     };
-    oauth_github_jwt_authorize_auth_github_authorize_get: {
+    oauth_github_cookie_authorize_auth_cookie_github_authorize_get: {
         parameters: {
             query?: {
                 scopes?: string[];
             };
-            header?: {
+            header: {
                 /** @description Language preference (e.g., en, ja) */
                 "Accept-Language"?: string;
+                /** @description Bearer token for authentication */
+                Authorization: string;
             };
             path?: never;
             cookie?: never;
@@ -1253,6 +1297,25 @@ export interface operations {
                     "application/json": components["schemas"]["OAuth2AuthorizeResponse"];
                 };
             };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /** @example {
+                     *       "errors": [
+                     *         {
+                     *           "status": "401",
+                     *           "code": "unauthorized",
+                     *           "title": "Unauthorized",
+                     *           "detail": "Authentication credentials were not provided or are invalid."
+                     *         }
+                     *       ]
+                     *     } */
+                    "application/json": unknown;
+                };
+            };
             /** @description Validation Error */
             422: {
                 headers: {
@@ -1296,7 +1359,7 @@ export interface operations {
             };
         };
     };
-    oauth_github_jwt_callback_auth_github_callback_get: {
+    oauth_github_cookie_callback_auth_cookie_github_callback_get: {
         parameters: {
             query?: {
                 code?: string | null;
@@ -1304,9 +1367,11 @@ export interface operations {
                 state?: string | null;
                 error?: string | null;
             };
-            header?: {
+            header: {
                 /** @description Language preference (e.g., en, ja) */
                 "Accept-Language"?: string;
+                /** @description Bearer token for authentication */
+                Authorization: string;
             };
             path?: never;
             cookie?: never;
@@ -1329,6 +1394,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ErrorModel"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /** @example {
+                     *       "errors": [
+                     *         {
+                     *           "status": "401",
+                     *           "code": "unauthorized",
+                     *           "title": "Unauthorized",
+                     *           "detail": "Authentication credentials were not provided or are invalid."
+                     *         }
+                     *       ]
+                     *     } */
+                    "application/json": unknown;
                 };
             };
             /** @description Validation Error */

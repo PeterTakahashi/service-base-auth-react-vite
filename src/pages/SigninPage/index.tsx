@@ -8,11 +8,11 @@ export const SigninPage: FC = () => {
 
   return (
     <AuthLayout title="Sign in to your account">
-      <AuthForm mode="signin" onSubmit={onSubmitSignIn} />
-
-      {errorMessage && (
-        <p className="mt-4 text-center text-sm text-red-600">{errorMessage}</p>
-      )}
+      <AuthForm
+        mode="signin"
+        errorMessage={errorMessage}
+        onSubmit={onSubmitSignIn}
+      />
 
       <div className="mt-10 text-center text-sm/6 text-gray-500">
         <div>
