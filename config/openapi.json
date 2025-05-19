@@ -128,7 +128,166 @@
             }
           }
         },
-        "security": [{ "OAuth2PasswordBearer": [] }],
+        "security": [{ "OAuth2PasswordBearer": [] }, { "APIKeyCookie": [] }],
+        "parameters": [
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language preference (e.g., en, ja)",
+            "required": false,
+            "schema": { "type": "string", "example": "en" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": { "type": "string", "example": "Bearer <token>" }
+          }
+        ]
+      }
+    },
+    "/auth/cookie/login": {
+      "post": {
+        "tags": ["auth", "auth"],
+        "summary": "Auth:Cookie.Login",
+        "operationId": "auth_cookie_login_auth_cookie_login_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_auth_cookie_login_auth_cookie_login_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorModel" },
+                "examples": {
+                  "LOGIN_BAD_CREDENTIALS": {
+                    "summary": "Bad credentials or the user is inactive.",
+                    "value": { "detail": "LOGIN_BAD_CREDENTIALS" }
+                  },
+                  "LOGIN_USER_NOT_VERIFIED": {
+                    "summary": "The user is not verified.",
+                    "value": { "detail": "LOGIN_USER_NOT_VERIFIED" }
+                  }
+                }
+              }
+            }
+          },
+          "204": { "description": "No Content" },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "422",
+                      "code": "validation_error",
+                      "title": "Validation Error",
+                      "detail": "The field 'title' is required.",
+                      "source": { "parameter": "title" }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "401",
+                      "code": "unauthorized",
+                      "title": "Unauthorized",
+                      "detail": "Authentication credentials were not provided or are invalid."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "500",
+                      "code": "internal_server_error",
+                      "title": "Internal Server Error",
+                      "detail": "An unexpected error occurred. Please try again later."
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language preference (e.g., en, ja)",
+            "required": false,
+            "schema": { "type": "string", "example": "en" }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": { "type": "string", "example": "Bearer <token>" }
+          }
+        ]
+      }
+    },
+    "/auth/cookie/logout": {
+      "post": {
+        "tags": ["auth", "auth"],
+        "summary": "Auth:Cookie.Logout",
+        "operationId": "auth_cookie_logout_auth_cookie_logout_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "401": { "description": "Missing token or inactive user." },
+          "204": { "description": "No Content" },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "status": "500",
+                      "code": "internal_server_error",
+                      "title": "Internal Server Error",
+                      "detail": "An unexpected error occurred. Please try again later."
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "OAuth2PasswordBearer": [] }, { "APIKeyCookie": [] }],
         "parameters": [
           {
             "name": "Accept-Language",
@@ -649,7 +808,7 @@
             }
           }
         },
-        "security": [{ "OAuth2PasswordBearer": [] }],
+        "security": [{ "OAuth2PasswordBearer": [] }, { "APIKeyCookie": [] }],
         "parameters": [
           {
             "name": "Accept-Language",
@@ -764,7 +923,7 @@
             }
           }
         },
-        "security": [{ "OAuth2PasswordBearer": [] }],
+        "security": [{ "OAuth2PasswordBearer": [] }, { "APIKeyCookie": [] }],
         "parameters": [
           {
             "name": "Accept-Language",
@@ -794,6 +953,31 @@
         "type": "object",
         "required": ["access_token", "token_type"],
         "title": "BearerResponse"
+      },
+      "Body_auth_cookie_login_auth_cookie_login_post": {
+        "properties": {
+          "grant_type": {
+            "anyOf": [
+              { "type": "string", "pattern": "^password$" },
+              { "type": "null" }
+            ],
+            "title": "Grant Type"
+          },
+          "username": { "type": "string", "title": "Username" },
+          "password": { "type": "string", "title": "Password" },
+          "scope": { "type": "string", "title": "Scope", "default": "" },
+          "client_id": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Client Id"
+          },
+          "client_secret": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Client Secret"
+          }
+        },
+        "type": "object",
+        "required": ["username", "password"],
+        "title": "Body_auth_cookie_login_auth_cookie_login_post"
       },
       "Body_auth_jwt_login_auth_jwt_login_post": {
         "properties": {
@@ -956,6 +1140,11 @@
       "OAuth2PasswordBearer": {
         "type": "oauth2",
         "flows": { "password": { "scopes": {}, "tokenUrl": "auth/jwt/login" } }
+      },
+      "APIKeyCookie": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "access_token"
       }
     }
   },

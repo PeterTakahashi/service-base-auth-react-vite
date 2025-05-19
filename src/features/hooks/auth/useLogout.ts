@@ -1,23 +1,25 @@
 import { useCallback } from "react";
-import { authClient } from "@/lib/authClient";
+import { client } from "@/lib/client";
 import { mutate } from "swr";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/features/hooks/context/useAuth";
 
 export function useLogout() {
   const navigate = useNavigate();
+  const { setIsLoggedIn } = useAuth();
   const logout = useCallback(async () => {
     try {
-      await authClient.post("/auth/jwt/logout");
+      await client.post("/auth/cookie/logout");
     } catch (error) {
       console.error("Logout request failed", error);
     } finally {
       mutate(() => true, undefined, { revalidate: false });
-      document.cookie = "access_token=;path=/;";
+      setIsLoggedIn(false);
       navigate("/signin", {
         state: { successMessage: "Logged out successfully" },
       });
     }
-  }, [navigate]);
+  }, [navigate, setIsLoggedIn]);
 
   return { logout };
 }

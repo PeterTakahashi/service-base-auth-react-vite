@@ -24,7 +24,9 @@ export const useResetPasswordForm = () => {
       try {
         await trigger({ password, token });
         setErrorMessage(null);
-        navigate("/signin");
+        navigate("/signin", {
+          state: { successMessage: "Password reset successfully" },
+        });
       } catch (error) {
         setErrorMessage(parseAxiosErrorMessage(error));
       }

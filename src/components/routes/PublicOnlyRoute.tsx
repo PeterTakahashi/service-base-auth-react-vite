@@ -1,15 +1,17 @@
-import type { FC, ReactNode } from "react";
+import React from "react";
 import { Navigate } from "react-router-dom";
-import { getAccessTokenFromCookie } from "@/lib/auth/getAccessTokenFromCookie";
+import { useAuth } from "@/features/hooks/context/useAuth";
+
 type PublicOnlyRouteProps = {
-  children: ReactNode;
+  children: React.ReactNode;
 };
 
-export const PublicOnlyRoute: FC<PublicOnlyRouteProps> = ({ children }) => {
-  const accessToken = getAccessTokenFromCookie();
+export function PublicOnlyRoute({ children }: PublicOnlyRouteProps) {
+  const { isLoggedIn } = useAuth();
 
-  if (accessToken) {
+  if (isLoggedIn) {
     return <Navigate to="/" replace />;
   }
+
   return <>{children}</>;
-};
+}

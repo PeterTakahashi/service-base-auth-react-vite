@@ -1,5 +1,5 @@
 import useSWRMutation from "swr/mutation";
-import { authClient } from "@/lib/authClient";
+import { client } from "@/lib/client";
 import type { verifyTokenRequestBody } from "@/types/api/verifyToken";
 import type { UserRead } from "@/types/api/user";
 
@@ -7,7 +7,7 @@ async function verifyTokenRequest(
   url: string,
   { arg }: { arg: verifyTokenRequestBody }
 ): Promise<UserRead> {
-  const response = await authClient.post(url, { token: arg.token });
+  const response = await client.post(url, { token: arg.token });
   return response.data;
 }
 

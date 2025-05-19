@@ -38,6 +38,40 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/auth/cookie/login": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Auth:Cookie.Login */
+    post: operations["auth_cookie_login_auth_cookie_login_post"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/auth/cookie/logout": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Auth:Cookie.Logout */
+    post: operations["auth_cookie_logout_auth_cookie_logout_post"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/auth/register/register": {
     parameters: {
       query?: never;
@@ -151,6 +185,24 @@ export interface components {
       access_token: string;
       /** Token Type */
       token_type: string;
+    };
+    /** Body_auth_cookie_login_auth_cookie_login_post */
+    Body_auth_cookie_login_auth_cookie_login_post: {
+      /** Grant Type */
+      grant_type?: string | null;
+      /** Username */
+      username: string;
+      /** Password */
+      password: string;
+      /**
+       * Scope
+       * @default
+       */
+      scope: string;
+      /** Client Id */
+      client_id?: string | null;
+      /** Client Secret */
+      client_secret?: string | null;
     };
     /** Body_auth_jwt_login_auth_jwt_login_post */
     Body_auth_jwt_login_auth_jwt_login_post: {
@@ -379,6 +431,169 @@ export interface operations {
         content: {
           "application/json": unknown;
         };
+      };
+      /** @description Missing token or inactive user. */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          /** @example {
+           *       "errors": [
+           *         {
+           *           "status": "500",
+           *           "code": "internal_server_error",
+           *           "title": "Internal Server Error",
+           *           "detail": "An unexpected error occurred. Please try again later."
+           *         }
+           *       ]
+           *     } */
+          "application/json": unknown;
+        };
+      };
+    };
+  };
+  auth_cookie_login_auth_cookie_login_post: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Language preference (e.g., en, ja) */
+        "Accept-Language"?: string;
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/x-www-form-urlencoded": components["schemas"]["Body_auth_cookie_login_auth_cookie_login_post"];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": unknown;
+        };
+      };
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ErrorModel"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          /** @example {
+           *       "errors": [
+           *         {
+           *           "status": "401",
+           *           "code": "unauthorized",
+           *           "title": "Unauthorized",
+           *           "detail": "Authentication credentials were not provided or are invalid."
+           *         }
+           *       ]
+           *     } */
+          "application/json": unknown;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          /** @example {
+           *       "errors": [
+           *         {
+           *           "status": "422",
+           *           "code": "validation_error",
+           *           "title": "Validation Error",
+           *           "detail": "The field 'title' is required.",
+           *           "source": {
+           *             "parameter": "title"
+           *           }
+           *         }
+           *       ]
+           *     } */
+          "application/json": unknown;
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          /** @example {
+           *       "errors": [
+           *         {
+           *           "status": "500",
+           *           "code": "internal_server_error",
+           *           "title": "Internal Server Error",
+           *           "detail": "An unexpected error occurred. Please try again later."
+           *         }
+           *       ]
+           *     } */
+          "application/json": unknown;
+        };
+      };
+    };
+  };
+  auth_cookie_logout_auth_cookie_logout_post: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Language preference (e.g., en, ja) */
+        "Accept-Language"?: string;
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": unknown;
+        };
+      };
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
       /** @description Missing token or inactive user. */
       401: {
