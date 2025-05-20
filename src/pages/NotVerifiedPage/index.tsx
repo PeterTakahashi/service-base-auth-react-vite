@@ -3,9 +3,9 @@ import { useRequestVerificationForm } from "@/features/hooks/form/auth/useReques
 import { useLogout } from "@/features/hooks/auth/useLogout";
 
 export const NotVerifiedPage: FC = () => {
-  const { user, errorMessage } = useRequestVerificationForm();
   const { logout } = useLogout();
-  if (!user) return;
+  const { user, errorMessage } = useRequestVerificationForm();
+  if (!user) return null;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
